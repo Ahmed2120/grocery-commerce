@@ -103,7 +103,6 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   void showLogoutDialog(){
-
     showDialog(context: context, builder: (ctx)=> AlertDialog(
       title: const Text('Logout'),
       content: const Text("Do you want to logout?"),
