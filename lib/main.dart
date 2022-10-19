@@ -5,6 +5,8 @@ import 'package:grocery_commerce/screens/home_page.dart';
 import 'package:provider/provider.dart';
 
 import 'consts/theme_data.dart';
+import 'inner_screens/feeds_screen.dart';
+import 'inner_screens/on_sale_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +47,10 @@ class _MyAppState extends State<MyApp> {
           title: 'Grocery Commerce',
           theme: Styles.themeData(theme.getDarkTheme, context),
           home: const BottomBarScreen(),
+            routes: {
+              OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
+              FeedsScreen.routeName: (ctx) => const FeedsScreen(),
+            }
         ),
       ),
     );
