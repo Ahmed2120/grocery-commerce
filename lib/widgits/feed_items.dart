@@ -16,6 +16,7 @@ class FeedsWidget extends StatefulWidget {
 
 class _FeedsWidgetState extends State<FeedsWidget> {
   final _quantityTextController = TextEditingController();
+  final FocusNode _quantityFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -92,6 +93,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                         Flexible(flex: 2,
                             child: TextFormField(
                               controller: _quantityTextController,
+                              focusNode: _quantityFocusNode,
                               key: const ValueKey('10'),
                               style: TextStyle(color: color, fontSize: 18),
                               keyboardType: TextInputType.number,
@@ -102,13 +104,14 @@ class _FeedsWidgetState extends State<FeedsWidget> {
 
                                 });
                               },
-                              // onEditingComplete: (){
-                              //   if(_quantityTextController.text.isEmpty){
-                              //   setState(() {
-                              //     _quantityTextController.text = '1';
-                              //     print('jj ${_quantityTextController.text}');
-                              //   });}
-                              // },
+                              onEditingComplete: (){
+                                if(_quantityTextController.text.isEmpty){
+                                setState(() {
+                                  _quantityTextController.text = '1';
+                                  print('jj ${_quantityTextController.text}');
+                                });}
+                                _quantityFocusNode.unfocus();
+                              },
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
                                   RegExp('[0-9.]'),

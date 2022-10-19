@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'consts/theme_data.dart';
 import 'inner_screens/feeds_screen.dart';
 import 'inner_screens/on_sale_screen.dart';
+import 'inner_screens/product_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
+              ProductDetails.routeName: (ctx) => const ProductDetails(),
             }
         ),
       ),

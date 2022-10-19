@@ -4,7 +4,7 @@ import 'package:grocery_commerce/screens/home_page.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
-import 'cart_screen.dart';
+import 'cart/cart_screen.dart';
 import 'categories_screen.dart';
 import 'user_screen.dart';
 
