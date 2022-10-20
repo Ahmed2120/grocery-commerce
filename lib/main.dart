@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:grocery_commerce/provider/dark_theme_provider.dart';
 import 'package:grocery_commerce/screens/btm_bar_screen.dart';
 import 'package:grocery_commerce/screens/home_page.dart';
+import 'package:grocery_commerce/screens/orders/orders_screen.dart';
+import 'package:grocery_commerce/screens/viewed_recently/viewed_recently.dart';
+import 'package:grocery_commerce/screens/wishlist/wishlist_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'consts/theme_data.dart';
@@ -52,6 +55,9 @@ class _MyAppState extends State<MyApp> {
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
               ProductDetails.routeName: (ctx) => const ProductDetails(),
+              WishlistScreen.routeName: (ctx) => const WishlistScreen(),
+              OrdersScreen.routeName: (ctx) => const OrdersScreen(),
+              ViewedRecentlyScreen.routeName: (ctx) => const ViewedRecentlyScreen(),
             }
         ),
       ),
