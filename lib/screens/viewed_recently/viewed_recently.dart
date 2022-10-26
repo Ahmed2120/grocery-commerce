@@ -5,6 +5,7 @@ import 'package:grocery_commerce/screens/viewed_recently/viewed_widget.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 import '../../widgits/back_widget.dart';
+import '../../widgits/empty_screen.dart';
 import '../../widgits/text_widget.dart';
 
 class ViewedRecentlyScreen extends StatefulWidget {
@@ -22,7 +23,15 @@ class _ViewedRecentlyScreenState extends State<ViewedRecentlyScreen> {
   Widget build(BuildContext context) {
     Color color = Utils(context).color;
     // Size size = Utils(context).getScreenSize;
-    return Scaffold(
+    bool isEmpty = true;
+
+    return isEmpty
+        ? const EmptyScreen(
+        imagePath: 'assets/images/history.png',
+        title: "Your History Is Empty",
+        subtitle: 'Now Product has been viewed yet!',
+        buttonText: 'shop now')
+        : Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(

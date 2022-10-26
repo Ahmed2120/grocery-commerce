@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
+import '../../widgits/empty_screen.dart';
 import '../../widgits/text_widget.dart';
 import 'cart_widget.dart';
 
@@ -13,7 +14,15 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
-    return Scaffold(
+    bool isEmpty = false;
+
+    return isEmpty
+        ? const EmptyScreen(
+        imagePath: 'assets/images/cart.png',
+        title: "Your Cart Is Empty",
+        subtitle: 'Add something and make me happy',
+        buttonText: 'shop now')
+        : Scaffold(
       appBar: AppBar(
           elevation: 0,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,

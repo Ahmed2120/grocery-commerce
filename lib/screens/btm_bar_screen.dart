@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_commerce/provider/dark_theme_provider.dart';
 import 'package:grocery_commerce/screens/home_page.dart';
@@ -16,7 +17,6 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-
   int _selectedIndex = 0;
   List pages = [
     const HomePage(),
@@ -25,7 +25,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     const UserScreen()
   ];
 
-  void _selectedPage(int index){
+  void _selectedPage(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -47,22 +47,31 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     );
   }
 
-  List<BottomNavigationBarItem> bottomNavigationBarItems ()=> [
-    BottomNavigationBarItem(
-        icon: Icon(_selectedIndex == 0 ? IconlyBold.home : IconlyLight.home),
-        label: 'Home'
-    ),
-    BottomNavigationBarItem(
-        icon: Icon(_selectedIndex == 1 ? IconlyBold.category : IconlyLight.category),
-        label: 'Categories'
-    ),
-    BottomNavigationBarItem(
-        icon: Icon(_selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
-        label: 'Cart'
-    ),
-    BottomNavigationBarItem(
-        icon: Icon(_selectedIndex == 3 ? IconlyBold.user2 : IconlyLight.user2),
-        label: 'User'
-    ),
-  ];
+  List<BottomNavigationBarItem> bottomNavigationBarItems() => [
+        BottomNavigationBarItem(
+            icon:
+                Icon(_selectedIndex == 0 ? IconlyBold.home : IconlyLight.home),
+            label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(_selectedIndex == 1
+                ? IconlyBold.category
+                : IconlyLight.category),
+            label: 'Categories'),
+        BottomNavigationBarItem(
+            icon: Badge(
+                toAnimate: true,
+                showBadge: true,
+                shape: BadgeShape.circle,
+                badgeColor: Colors.blue,
+                borderRadius: BorderRadius.circular(8),
+                badgeContent:
+                    const Text('2', style: TextStyle(color: Colors.white)),
+                child: Icon(
+                    _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy)),
+            label: 'Cart'),
+        BottomNavigationBarItem(
+            icon: Icon(
+                _selectedIndex == 3 ? IconlyBold.user2 : IconlyLight.user2),
+            label: 'User'),
+      ];
 }

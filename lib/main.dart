@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_commerce/provider/dark_theme_provider.dart';
+import 'package:grocery_commerce/screens/auth/login.dart';
 import 'package:grocery_commerce/screens/btm_bar_screen.dart';
 import 'package:grocery_commerce/screens/home_page.dart';
 import 'package:grocery_commerce/screens/orders/orders_screen.dart';
@@ -11,6 +12,8 @@ import 'consts/theme_data.dart';
 import 'inner_screens/feeds_screen.dart';
 import 'inner_screens/on_sale_screen.dart';
 import 'inner_screens/product_details.dart';
+import 'screens/auth/forget_pass.dart';
+import 'screens/auth/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +53,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, theme, child)=> MaterialApp(
           title: 'Grocery Commerce',
           theme: Styles.themeData(theme.getDarkTheme, context),
-          home: const BottomBarScreen(),
+          home: const LoginScreen(),
             routes: {
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
@@ -58,6 +61,9 @@ class _MyAppState extends State<MyApp> {
               WishlistScreen.routeName: (ctx) => const WishlistScreen(),
               OrdersScreen.routeName: (ctx) => const OrdersScreen(),
               ViewedRecentlyScreen.routeName: (ctx) => const ViewedRecentlyScreen(),
+              RegisterScreen.routeName: (ctx) => const RegisterScreen(),
+              LoginScreen.routeName: (ctx) => const LoginScreen(),
+              ForgetPasswordScreen.routeName: (ctx) => const ForgetPasswordScreen(),
             }
         ),
       ),

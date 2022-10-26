@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../services/utils.dart';
 import '../../widgits/back_widget.dart';
+import '../../widgits/empty_screen.dart';
 import '../../widgits/text_widget.dart';
 import 'orders_widget.dart';
 
@@ -19,7 +20,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     // Size size = Utils(context).getScreenSize;
-    return Scaffold(
+    bool isEmpty = true;
+
+    return isEmpty
+        ? const EmptyScreen(
+        imagePath: 'assets/images/cart.png',
+        title: "You didn't Place any order yet",
+        subtitle: 'Order any thing and make me happy',
+        buttonText: 'shop now')
+        : Scaffold(
         appBar: AppBar(
           leading: const BackWidget(),
           elevation: 0,
