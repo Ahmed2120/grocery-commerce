@@ -4,7 +4,11 @@ import 'package:grocery_commerce/widgits/text_widget.dart';
 import '../services/utils.dart';
 
 class PriceWidget extends StatelessWidget {
-  const PriceWidget({Key? key}) : super(key: key);
+  const PriceWidget({Key? key, required this.salePrice, required this.price, required this.isOnSale}) : super(key: key);
+
+  final double salePrice;
+  final double price;
+  final bool isOnSale;
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +17,22 @@ class PriceWidget extends StatelessWidget {
         child: Row(
       children: [
         TextWidget(
-          text: '1.59\$',
+          text: '$salePrice\$',
           color: Colors.green,
           textSize: 22,
         ),
         const SizedBox(
           width: 5,
         ),
-        Text(
-          '2.59\$',
-          style: TextStyle(
-            fontSize: 15,
-            color: color,
-            decoration: TextDecoration.lineThrough,
+        Visibility(
+          visible: isOnSale,
+          child: Text(
+            '$price\$',
+            style: TextStyle(
+              fontSize: 15,
+              color: color,
+              decoration: TextDecoration.lineThrough,
+            ),
           ),
         )
       ],

@@ -11,7 +11,12 @@ import 'package:provider/provider.dart';
 import 'consts/theme_data.dart';
 import 'inner_screens/feeds_screen.dart';
 import 'inner_screens/on_sale_screen.dart';
+import 'inner_screens/prod_by_catScreen.dart';
 import 'inner_screens/product_details.dart';
+import 'provider/cart_provider.dart';
+import 'provider/products_provider.dart';
+import 'provider/viewed_prod_provider.dart';
+import 'provider/wishlist_provider.dart';
 import 'screens/auth/forget_pass.dart';
 import 'screens/auth/register.dart';
 
@@ -48,12 +53,16 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> darkThemeProvider),
+        ChangeNotifierProvider(create: (_)=> ProductsProvider()),
+        ChangeNotifierProvider(create: (_)=> CartProvider()),
+        ChangeNotifierProvider(create: (_)=> WishlistProvider()),
+        ChangeNotifierProvider(create: (_)=> ViewedProdProvider()),
       ],
       child: Consumer<DarkThemeProvider>(
         builder: (context, theme, child)=> MaterialApp(
           title: 'Grocery Commerce',
           theme: Styles.themeData(theme.getDarkTheme, context),
-          home: const LoginScreen(),
+          home: const BottomBarScreen(),
             routes: {
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
@@ -64,6 +73,7 @@ class _MyAppState extends State<MyApp> {
               RegisterScreen.routeName: (ctx) => const RegisterScreen(),
               LoginScreen.routeName: (ctx) => const LoginScreen(),
               ForgetPasswordScreen.routeName: (ctx) => const ForgetPasswordScreen(),
+              ProdByCatScreen.routeName: (ctx) => const ProdByCatScreen(),
             }
         ),
       ),

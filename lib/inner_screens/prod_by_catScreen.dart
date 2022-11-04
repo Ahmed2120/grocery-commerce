@@ -8,15 +8,15 @@ import '../widgits/empty_products_widget.dart';
 import '../widgits/feed_items.dart';
 import '../widgits/text_widget.dart';
 
-class FeedsScreen extends StatefulWidget {
-  static const routeName = "/FeedsScreenState";
-  const FeedsScreen({Key? key}) : super(key: key);
+class ProdByCatScreen extends StatefulWidget {
+  static const routeName = "/ProdByCatScreen";
+  const ProdByCatScreen({Key? key}) : super(key: key);
 
   @override
-  State<FeedsScreen> createState() => _FeedsScreenState();
+  State<ProdByCatScreen> createState() => _ProdByCatScreenState();
 }
 
-class _FeedsScreenState extends State<FeedsScreen> {
+class _ProdByCatScreenState extends State<ProdByCatScreen> {
   final TextEditingController? _searchTextController = TextEditingController();
   final FocusNode _searchTextFocusNode = FocusNode();
 
@@ -31,7 +31,8 @@ class _FeedsScreenState extends State<FeedsScreen> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
-    final allProducts = Provider.of<ProductsProvider>(context).getProducts;
+    final categoryId = ModalRoute.of(context)!.settings.arguments as int;
+    final allProducts = Provider.of<ProductsProvider>(context).getProdsByCat(categoryId);
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -70,12 +71,12 @@ class _FeedsScreenState extends State<FeedsScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide:
-                        const BorderSide(color: Colors.greenAccent, width: 1),
+                    const BorderSide(color: Colors.greenAccent, width: 1),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide:
-                        const BorderSide(color: Colors.greenAccent, width: 1),
+                    const BorderSide(color: Colors.greenAccent, width: 1),
                   ),
                   hintText: "What's in your mind",
                   prefixIcon: const Icon(Icons.search),
@@ -102,7 +103,7 @@ class _FeedsScreenState extends State<FeedsScreen> {
             childAspectRatio: size.width / (size.height * 0.68),
             children: List.generate(allProducts.length, (index) {
               return ChangeNotifierProvider.value(
-                value: allProducts[index],
+                  value: allProducts[index],
                   child: const FeedsWidget()
               );
             }),

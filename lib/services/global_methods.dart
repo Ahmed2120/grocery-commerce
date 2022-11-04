@@ -15,12 +15,14 @@ class GlobalMethods {
        TextButton(
          child: TextWidget(text: 'Cancel', textSize: 18, color: Colors.cyan,),
          onPressed: (){
-           Navigator.of(context).pop(false);
+           Navigator.of(context).pop();
          },
        ),
        TextButton(
          child: TextWidget(text: 'Ok', textSize: 18, color: Colors.red,),
-         onPressed: ()=> function(),
+         onPressed: (){ function();
+         Navigator.of(context).pop();
+           },
        ),
      ],
    ));

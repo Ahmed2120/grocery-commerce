@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../inner_screens/feeds_screen.dart';
 import '../inner_screens/on_sale_screen.dart';
 import '../provider/dark_theme_provider.dart';
+import '../provider/products_provider.dart';
 import '../services/utils.dart';
 import '../widgits/feed_items.dart';
 import '../widgits/global_methods.dart';
@@ -20,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final List<String> _offerImages = [
     'assets/images/offres/Offer1.jpg',
     'assets/images/offres/Offer2.jpg',
@@ -33,6 +33,10 @@ class _HomePageState extends State<HomePage> {
     final Utils utils = Utils(context);
     final themeState = utils.getTheme;
     Size size = utils.getScreenSize;
+    final allProducts = Provider.of<ProductsProvider>(context).getProducts;
+    final allOnSaleProducts =
+        Provider.of<ProductsProvider>(context).getOnSaleProducts;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -85,7 +89,9 @@ class _HomePageState extends State<HomePage> {
                         textSize: 22,
                         isTitle: true,
                       ),
-                      const SizedBox(width: 5,),
+                      const SizedBox(
+                        width: 5,
+                      ),
                       const Icon(
                         IconlyLight.discount,
                         color: Colors.red,
@@ -93,15 +99,19 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                const SizedBox(width: 8,),
+                const SizedBox(
+                  width: 8,
+                ),
                 Flexible(
                   child: SizedBox(
                     height: size.height * 0.24,
                     child: ListView.builder(
-                        itemCount: 10,
+                        itemCount: allOnSaleProducts.length < 10 ? allOnSaleProducts.length : 10,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (ctx, index) {
-                          return const OnSaleWidget();
+                          return ChangeNotifierProvider.value(
+                            value: allOnSaleProducts[index],
+                              child: const OnSaleWidget());
                         }),
                   ),
                 ),
@@ -122,7 +132,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   // const Spacer(),
                   TextButton(
-                    onPressed: () => GlobalMethods.navigateTo(ctx: context, routeName: FeedsScreen.routeName),
+                    onPressed: () => GlobalMethods.navigateTo(
+                        ctx: context, routeName: FeedsScreen.routeName),
                     child: TextWidget(
                       text: 'Browse all',
                       maxLines: 1,
@@ -139,8 +150,9 @@ class _HomePageState extends State<HomePage> {
               crossAxisCount: 2,
               padding: EdgeInsets.zero,
               childAspectRatio: size.width / (size.height * 0.68),
-              children: List.generate(4, (index) {
-                return  const FeedsWidget();
+              children: List.generate(allProducts.length < 8 ? allProducts.length : 8, (index) {
+                return ChangeNotifierProvider.value(
+                    value: allProducts[index], child: const FeedsWidget());
               }),
             )
           ],

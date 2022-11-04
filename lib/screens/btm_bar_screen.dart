@@ -5,6 +5,7 @@ import 'package:grocery_commerce/screens/home_page.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/cart_provider.dart';
 import 'cart/cart_screen.dart';
 import 'categories_screen.dart';
 import 'user_screen.dart';
@@ -34,6 +35,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Provider.of<DarkThemeProvider>(context).getDarkTheme;
+    final cartItems = Provider.of<CartProvider>(context).getCartItems;
+
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -47,7 +50,9 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     );
   }
 
-  List<BottomNavigationBarItem> bottomNavigationBarItems() => [
+  List<BottomNavigationBarItem> bottomNavigationBarItems() {
+    final cartItems = Provider.of<CartProvider>(context).getCartItems;
+    return [
         BottomNavigationBarItem(
             icon:
                 Icon(_selectedIndex == 0 ? IconlyBold.home : IconlyLight.home),
@@ -60,12 +65,12 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         BottomNavigationBarItem(
             icon: Badge(
                 toAnimate: true,
-                showBadge: true,
+                showBadge: cartItems.isEmpty ? false : true,
                 shape: BadgeShape.circle,
                 badgeColor: Colors.blue,
                 borderRadius: BorderRadius.circular(8),
                 badgeContent:
-                    const Text('2', style: TextStyle(color: Colors.white)),
+                    Text('${cartItems.length}', style: TextStyle(color: Colors.white)),
                 child: Icon(
                     _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy)),
             label: 'Cart'),
@@ -73,5 +78,5 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             icon: Icon(
                 _selectedIndex == 3 ? IconlyBold.user2 : IconlyLight.user2),
             label: 'User'),
-      ];
+      ];}
 }

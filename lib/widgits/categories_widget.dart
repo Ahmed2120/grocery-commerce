@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_commerce/screens/categories_screen.dart';
+import '../inner_screens/prod_by_catScreen.dart';
 import 'text_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +23,7 @@ class CategoriesWidget extends StatelessWidget {
     final Color color = themeState.getDarkTheme ? Colors.white : Colors.black;
     return InkWell(
       onTap: () {
-        print('Category pressed');
+        Navigator.of(context).pushNamed(ProdByCatScreen.routeName, arguments: 1); // categoryId
       },
       child: Container(
         // height: _screenWidth * 0.6,

@@ -1,9 +1,14 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grocery_commerce/provider/cart_provider.dart';
 import 'package:grocery_commerce/widgits/price_widget.dart';
 import 'package:grocery_commerce/widgits/text_widget.dart';
+import 'package:provider/provider.dart';
 
+import '../inner_screens/product_details.dart';
+import '../model/product.dart';
+import '../services/global_methods.dart';
 import '../services/utils.dart';
 import 'heart_btn.dart';
 
@@ -34,33 +39,42 @@ class _FeedsWidgetState extends State<FeedsWidget> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
+    final product = Provider.of<Product>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool isInCart = cartProvider.isItemInCart(product.id!);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).cardColor,
         child: InkWell(
-          onTap: () {},
+          onTap: () => Navigator.of(context).pushNamed(ProductDetails.routeName, arguments: product),
           borderRadius: BorderRadius.circular(12),
           child: Column(children: [
-            Image.network(
-              'https://i.ibb.co/F0s3FHQ/Apricots.png',
-              // width: size.width*0.22,
-              height: size.height * 0.13,
-              fit: BoxFit.fill,
+            FancyShimmerImage(
+              imageUrl: product.image,
+              height: size.width * 0.21,
+              width: size.width * 0.2,
+              boxFit: BoxFit.fill,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextWidget(
-                    text: 'Title',
-                    color: color,
-                    textSize: 20,
-                    isTitle: true,
+                  Flexible(
+                    flex: 3,
+                    child: FittedBox(
+                      child: TextWidget(
+                        text: product.name,
+                        color: color,
+                        textSize: 18,
+                        isTitle: true,
+                      ),
+                    ),
                   ),
-                  const HeartBTN(),
+                  Flexible(flex: 1, child: HeartBTN(productId: product.id!,)),
                 ],
               ),
             ),
@@ -69,18 +83,21 @@ class _FeedsWidgetState extends State<FeedsWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const PriceWidget(),
-                  const SizedBox(
-                    width: 8,
-                  ),
+                  Flexible(
+                      flex: 3,
+                      child: PriceWidget(
+                        salePrice: product.salePrice,
+                        price: product.price,
+                        isOnSale: product.isOnSale,
+                      )),
                   Flexible(
                     child: Row(
                       children: [
                         Flexible(
-                          flex: 1,
+                          flex: 6,
                           child: FittedBox(
                             child: TextWidget(
-                              text: 'KG',
+                              text: product.isPiece ? 'Piece' : 'KG',
                               color: color,
                               textSize: 18,
                               isTitle: true,
@@ -90,7 +107,8 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                         const SizedBox(
                           width: 5,
                         ),
-                        Flexible(flex: 2,
+                        Flexible(
+                            flex: 2,
                             child: TextFormField(
                               controller: _quantityTextController,
                               focusNode: _quantityFocusNode,
@@ -99,17 +117,15 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                               keyboardType: TextInputType.number,
                               maxLines: 1,
                               enabled: true,
-                              onChanged: (valueee){
-                                setState(() {
-
-                                });
+                              onChanged: (valueee) {
+                                setState(() {});
                               },
-                              onEditingComplete: (){
-                                if(_quantityTextController.text.isEmpty){
-                                setState(() {
-                                  _quantityTextController.text = '1';
-                                  print('jj ${_quantityTextController.text}');
-                                });}
+                              onEditingComplete: () {
+                                if (_quantityTextController.text.isEmpty) {
+                                  setState(() {
+                                    _quantityTextController.text = '1';
+                                  });
+                                }
                                 _quantityFocusNode.unfocus();
                               },
                               inputFormatters: [
@@ -128,7 +144,9 @@ class _FeedsWidgetState extends State<FeedsWidget> {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: isInCart ? null : () {
+                  cartProvider.addProductsToCart(productId: product.id!, quantity: int.parse(_quantityTextController.text));
+                },
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Theme.of(context).cardColor),
@@ -142,7 +160,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                       ),
                     )),
                 child: TextWidget(
-                  text: 'Add to cart',
+                  text: isInCart ? 'In Cart' : 'Add to cart',
                   maxLines: 1,
                   color: color,
                   textSize: 20,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:grocery_commerce/screens/viewed_recently/viewed_widget.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/viewed_prod_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 import '../../widgits/back_widget.dart';
@@ -23,9 +25,10 @@ class _ViewedRecentlyScreenState extends State<ViewedRecentlyScreen> {
   Widget build(BuildContext context) {
     Color color = Utils(context).color;
     // Size size = Utils(context).getScreenSize;
-    bool isEmpty = true;
+    final viewedProdProvider = Provider.of<ViewedProdProvider>(context);
+    final viewedItemsList = viewedProdProvider.getWishlistItems;
 
-    return isEmpty
+    return viewedItemsList.isEmpty
         ? const EmptyScreen(
         imagePath: 'assets/images/history.png',
         title: "Your History Is Empty",
@@ -39,7 +42,7 @@ class _ViewedRecentlyScreenState extends State<ViewedRecentlyScreen> {
               GlobalMethods.showMessageDialog(
                   title: 'Empty your history?',
                   subTitle: 'Are you sure?',
-                  function: () {},
+                  function: () => viewedProdProvider.removeAllItems(),
                   context: context);
             },
             icon: Icon(
@@ -61,11 +64,13 @@ class _ViewedRecentlyScreenState extends State<ViewedRecentlyScreen> {
             Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
       ),
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: viewedItemsList.length,
           itemBuilder: (ctx, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2, vertical: 6),
-              child: ViewedRecentlyWidget(),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+              child: ChangeNotifierProvider.value(
+                  value: viewedItemsList[index],
+                  child: const ViewedRecentlyWidget()),
             );
           }),
     );
