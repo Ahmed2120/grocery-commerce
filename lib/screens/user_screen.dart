@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:grocery_commerce/screens/auth/login.dart';
 import 'package:grocery_commerce/screens/viewed_recently/viewed_recently.dart';
 import 'package:grocery_commerce/screens/wishlist/wishlist_screen.dart';
 import 'package:grocery_commerce/services/global_methods.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../provider/dark_theme_provider.dart';
 import '../widgits/newListTile.dart';
 import '../widgits/text_widget.dart';
@@ -18,6 +21,8 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final User? user = authInstance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
@@ -77,14 +82,24 @@ class _UserScreenState extends State<UserScreen> {
               NewListTile(
                 title: 'Wishlist',
                 icon: IconlyLight.heart,
-                function: () => GlobalMethods.navigateTo(
-                    ctx: context, routeName: WishlistScreen.routeName),
+                function: () {
+                  if(user == null){
+                    GlobalMethods.errorDialog(subtitle: 'Please login first.', context: context);
+                    return;
+                  }
+                  GlobalMethods.navigateTo(
+                    ctx: context, routeName: WishlistScreen.routeName);},
               ),
               NewListTile(
                 title: 'Viewed',
                 icon: IconlyLight.show,
-                function: () => GlobalMethods.navigateTo(
-                    ctx: context, routeName: ViewedRecentlyScreen.routeName),
+                function: () {
+                  if(user == null){
+                    GlobalMethods.errorDialog(subtitle: 'Please login first.', context: context);
+                    return;
+                  }
+                  GlobalMethods.navigateTo(
+                    ctx: context, routeName: ViewedRecentlyScreen.routeName);},
               ),
               NewListTile(
                 title: 'Change password',
@@ -108,13 +123,24 @@ class _UserScreenState extends State<UserScreen> {
                 value: themeState.getDarkTheme,
               ),
               NewListTile(
-                title: 'Logout',
-                icon: IconlyLight.logout,
-                function: () => GlobalMethods.showMessageDialog(
+                title: user == null ? 'Login' : 'Logout',
+                icon: user == null ? IconlyLight.login : IconlyLight.logout,
+                function: () {
+                  if(user == null) {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const LoginScreen()));
+                  }
+                  else{
+                  GlobalMethods.showMessageDialog(
                     title: 'Logout',
                     subTitle: "Do you want to logout?",
                     context: context,
-                    function: () {}),
+                    function: () {
+                      authInstance.signOut();
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => const LoginScreen()));
+                    });}
+                  },
               ),
             ],
           ),
@@ -130,8 +156,8 @@ class _UserScreenState extends State<UserScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        icon: const Icon(Icons.category_outlined),
-        title: const Text('إضافة صنف'),
+        icon: const Icon(IconlyBold.location),
+        title: const Text('Edit Address'),
         content: SingleChildScrollView(
           child: SizedBox(
             child: Form(

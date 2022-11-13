@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_commerce/provider/dark_theme_provider.dart';
 import 'package:grocery_commerce/screens/auth/login.dart';
@@ -32,7 +33,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   DarkThemeProvider darkThemeProvider = DarkThemeProvider();
 
   getCurrentTheme() async {
@@ -48,35 +48,60 @@ class _MyAppState extends State<MyApp> {
     getCurrentTheme();
   }
 
+  final _firebaseInitialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_)=> darkThemeProvider),
-        ChangeNotifierProvider(create: (_)=> ProductsProvider()),
-        ChangeNotifierProvider(create: (_)=> CartProvider()),
-        ChangeNotifierProvider(create: (_)=> WishlistProvider()),
-        ChangeNotifierProvider(create: (_)=> ViewedProdProvider()),
-      ],
-      child: Consumer<DarkThemeProvider>(
-        builder: (context, theme, child)=> MaterialApp(
-          title: 'Grocery Commerce',
-          theme: Styles.themeData(theme.getDarkTheme, context),
-          home: const BottomBarScreen(),
-            routes: {
-              OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
-              FeedsScreen.routeName: (ctx) => const FeedsScreen(),
-              ProductDetails.routeName: (ctx) => const ProductDetails(),
-              WishlistScreen.routeName: (ctx) => const WishlistScreen(),
-              OrdersScreen.routeName: (ctx) => const OrdersScreen(),
-              ViewedRecentlyScreen.routeName: (ctx) => const ViewedRecentlyScreen(),
-              RegisterScreen.routeName: (ctx) => const RegisterScreen(),
-              LoginScreen.routeName: (ctx) => const LoginScreen(),
-              ForgetPasswordScreen.routeName: (ctx) => const ForgetPasswordScreen(),
-              ProdByCatScreen.routeName: (ctx) => const ProdByCatScreen(),
-            }
-        ),
-      ),
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        }
+        else if(snapshot.hasError){
+          const MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Text('An error occurred'),
+              ),
+            ),
+          );
+        }
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => darkThemeProvider),
+            ChangeNotifierProvider(create: (_) => ProductsProvider()),
+            ChangeNotifierProvider(create: (_) => CartProvider()),
+            ChangeNotifierProvider(create: (_) => WishlistProvider()),
+            ChangeNotifierProvider(create: (_) => ViewedProdProvider()),
+          ],
+          child: Consumer<DarkThemeProvider>(
+            builder: (context, theme, child) => MaterialApp(
+                title: 'Grocery Commerce',
+                theme: Styles.themeData(theme.getDarkTheme, context),
+                home: const BottomBarScreen(),
+                routes: {
+                  OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
+                  FeedsScreen.routeName: (ctx) => const FeedsScreen(),
+                  ProductDetails.routeName: (ctx) => const ProductDetails(),
+                  WishlistScreen.routeName: (ctx) => const WishlistScreen(),
+                  OrdersScreen.routeName: (ctx) => const OrdersScreen(),
+                  ViewedRecentlyScreen.routeName: (ctx) =>
+                      const ViewedRecentlyScreen(),
+                  RegisterScreen.routeName: (ctx) => const RegisterScreen(),
+                  LoginScreen.routeName: (ctx) => const LoginScreen(),
+                  ForgetPasswordScreen.routeName: (ctx) =>
+                      const ForgetPasswordScreen(),
+                  ProdByCatScreen.routeName: (ctx) => const ProdByCatScreen(),
+                }),
+          ),
+        );
+      },
     );
   }
 }

@@ -21,6 +21,9 @@ dependencies:
   fancy_shimmer_image: ^2.0.2
   flutter_staggered_grid_view:
   badges: ^2.0.3
+  firebase_core: ^2.2.0
+  firebase_auth: ^4.1.2
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:

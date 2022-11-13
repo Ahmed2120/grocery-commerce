@@ -1,13 +1,17 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:grocery_commerce/widgits/text_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../inner_screens/product_details.dart';
 import '../model/product.dart';
 import '../provider/cart_provider.dart';
+import '../services/global_methods.dart';
 import '../services/utils.dart';
+import 'heart_btn.dart';
 import 'price_widget.dart';
 
 class OnSaleWidget extends StatefulWidget {
@@ -62,6 +66,11 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                           children: [
                             GestureDetector(
                               onTap: isInCart ? null : () {
+                                final User? user = authInstance.currentUser;
+                                if(user == null){
+                                  GlobalMethods.errorDialog(subtitle: 'Please login first.', context: context);
+                                  return;
+                                }
                                 cartProvider.addProductsToCart(productId: product.id!, quantity: 1);
                               },
                               child: Icon(
@@ -70,16 +79,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                 color: isInCart ? Colors.green : color,
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                print('print heart button is pressed');
-                              },
-                              child: Icon(
-                                IconlyLight.heart,
-                                size: 22,
-                                color: color,
-                              ),
-                            ),
+                            HeartBTN(productId: product.id!,),
                           ],
                         ),
                       ],

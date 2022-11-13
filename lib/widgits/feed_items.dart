@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grocery_commerce/provider/cart_provider.dart';
@@ -6,6 +7,7 @@ import 'package:grocery_commerce/widgits/price_widget.dart';
 import 'package:grocery_commerce/widgits/text_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../inner_screens/product_details.dart';
 import '../model/product.dart';
 import '../services/global_methods.dart';
@@ -145,6 +147,11 @@ class _FeedsWidgetState extends State<FeedsWidget> {
               width: double.infinity,
               child: TextButton(
                 onPressed: isInCart ? null : () {
+                  final User? user = authInstance.currentUser;
+                  if(user == null){
+                    GlobalMethods.errorDialog(subtitle: 'Please login first.', context: context);
+                    return;
+                  }
                   cartProvider.addProductsToCart(productId: product.id!, quantity: int.parse(_quantityTextController.text));
                 },
                 style: ButtonStyle(

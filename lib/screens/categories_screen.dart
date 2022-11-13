@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../consts/contss.dart';
 import '/services/utils.dart';
 
 import '../services/utils.dart';
@@ -17,32 +18,6 @@ class CategoriesScreen extends StatelessWidget {
     const Color(0xffB7DFF5),
   ];
 
-  List<Map<String, dynamic>> catInfo = [
-    {
-      'imgPath': 'assets/images/cat/fruits.png',
-      'catText': 'Fruits',
-    },
-    {
-      'imgPath': 'assets/images/cat/veg.png',
-      'catText': 'Vegetables',
-    },
-    {
-      'imgPath': 'assets/images/cat/Spinach.png',
-      'catText': 'Herbs',
-    },
-    {
-      'imgPath': 'assets/images/cat/nuts.png',
-      'catText': 'Nuts',
-    },
-    {
-      'imgPath': 'assets/images/cat/spices.png',
-      'catText': 'Spices',
-    },
-    {
-      'imgPath': 'assets/images/cat/grains.png',
-      'catText': 'Grains',
-    },
-  ];
   @override
   Widget build(BuildContext context) {
 
@@ -68,8 +43,7 @@ class CategoriesScreen extends StatelessWidget {
             mainAxisSpacing: 10, // Horizontal spacing
             children: List.generate(6, (index) {
               return CategoriesWidget(
-                catText: catInfo[index]['catText'],
-                imgPath: catInfo[index]['imgPath'],
+                category: Constss.catInfo[index],
                 passedColor: gridColors[index],
               );
             }),

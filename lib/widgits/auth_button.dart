@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'text_widget.dart';
 
 class AuthButton extends StatelessWidget {
-  const AuthButton({
+  AuthButton({
     Key? key,
     required this.fct,
     required this.buttonText,
     this.primary = Colors.white38,
+    this.isLoading = false
   }) : super(key: key);
   final Function fct;
   final String buttonText;
   final Color primary;
+  bool isLoading;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,7 +22,7 @@ class AuthButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             primary: primary, // background (button) color
           ),
-          onPressed: () {
+          onPressed: isLoading ? null : () {
             fct();
             // _submitFormOnLogin();
           },

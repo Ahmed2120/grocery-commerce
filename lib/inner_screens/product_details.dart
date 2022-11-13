@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,9 @@ import 'package:grocery_commerce/model/product.dart';
 import 'package:grocery_commerce/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../provider/viewed_prod_provider.dart';
+import '../services/global_methods.dart';
 import '../services/utils.dart';
 import '../widgits/heart_btn.dart';
 import '../widgits/text_widget.dart';
@@ -62,10 +65,9 @@ class _ProductDetailsState extends State<ProductDetails> {
           Flexible(
             flex: 2,
             child: FancyShimmerImage(
-              imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+              imageUrl: product.image,
               boxFit: BoxFit.scaleDown,
               width: size.width,
-              // height: screenHeight * .4,
             ),
           ),
           Flexible(
@@ -263,6 +265,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                             borderRadius: BorderRadius.circular(10),
                             child: InkWell(
                                 onTap: isInCart ? null : () {
+                                  final User? user = authInstance.currentUser;
+                                  if(user == null){
+                                    GlobalMethods.errorDialog(subtitle: 'Please login first.', context: context);
+                                    return;
+                                  }
                                   cartProvider.addProductsToCart(productId: product.id!, quantity: int.parse(_quantityTextController.text));
                                 },
                               borderRadius: BorderRadius.circular(10),
