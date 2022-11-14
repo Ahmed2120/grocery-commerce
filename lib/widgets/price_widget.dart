@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_commerce/widgits/text_widget.dart';
+import 'package:grocery_commerce/widgets/text_widget.dart';
 
 import '../services/utils.dart';
 

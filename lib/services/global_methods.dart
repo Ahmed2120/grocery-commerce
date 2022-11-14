@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgits/text_widget.dart';
+import '../widgets/text_widget.dart';
 
 class GlobalMethods {
 

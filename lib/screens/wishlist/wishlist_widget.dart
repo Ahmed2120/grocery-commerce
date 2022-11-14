@@ -9,8 +9,8 @@ import '../../provider/cart_provider.dart';
 import '../../provider/products_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/heart_btn.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/heart_btn.dart';
+import '../../widgets/text_widget.dart';
 
 class WishlistWidget extends StatelessWidget {
   const WishlistWidget({Key? key}) : super(key: key);

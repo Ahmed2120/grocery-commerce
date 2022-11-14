@@ -8,10 +8,10 @@ import '../inner_screens/on_sale_screen.dart';
 import '../provider/dark_theme_provider.dart';
 import '../provider/products_provider.dart';
 import '../services/utils.dart';
-import '../widgits/feed_items.dart';
-import '../widgits/global_methods.dart';
-import '../widgits/on_sale_widget.dart';
-import '../widgits/text_widget.dart';
+import '../widgets/feed_items.dart';
+import '../widgets/global_methods.dart';
+import '../widgets/on_sale_widget.dart';
+import '../widgets/text_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

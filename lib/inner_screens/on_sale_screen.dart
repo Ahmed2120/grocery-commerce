@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../provider/products_provider.dart';
 import '../services/utils.dart';
-import '../widgits/on_sale_widget.dart';
-import '../widgits/text_widget.dart';
+import '../widgets/on_sale_widget.dart';
+import '../widgets/text_widget.dart';
 
 class OnSaleScreen extends StatelessWidget {
   static const routeName = "/OnSaleScreen";

@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../provider/products_provider.dart';
 import '../services/utils.dart';
-import '../widgits/empty_products_widget.dart';
-import '../widgits/feed_items.dart';
-import '../widgits/text_widget.dart';
+import '../widgets/empty_products_widget.dart';
+import '../widgets/feed_items.dart';
+import '../widgets/text_widget.dart';
 
 class FeedsScreen extends StatefulWidget {
   static const routeName = "/FeedsScreenState";

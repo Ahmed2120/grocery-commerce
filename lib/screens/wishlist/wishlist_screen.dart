@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:grocery_commerce/widgits/empty_screen.dart';
+import 'package:grocery_commerce/widgets/empty_screen.dart';
 import 'package:provider/provider.dart';
 import '../../provider/wishlist_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/back_widget.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/back_widget.dart';
+import '../../widgets/text_widget.dart';
 import 'wishlist_widget.dart';
 
 class WishlistScreen extends StatelessWidget {

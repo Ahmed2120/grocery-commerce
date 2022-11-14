@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:grocery_commerce/widgits/text_widget.dart';
+import 'package:grocery_commerce/widgets/text_widget.dart';
 
 class NewListTile extends StatelessWidget {
   const NewListTile({

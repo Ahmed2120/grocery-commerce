@@ -11,8 +11,8 @@ import '../../model/cart.dart';
 import '../../provider/cart_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/heart_btn.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/heart_btn.dart';
+import '../../widgets/text_widget.dart';
 
 class CartWidget extends StatefulWidget {
   const CartWidget({Key? key, required this.quantity}) : super(key: key);

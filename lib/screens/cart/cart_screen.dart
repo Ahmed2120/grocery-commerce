@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../provider/cart_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/empty_screen.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/empty_screen.dart';
+import '../../widgets/text_widget.dart';
 import 'cart_widget.dart';
 
 class CartScreen extends StatelessWidget {

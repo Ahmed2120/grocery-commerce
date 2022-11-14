@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../inner_screens/product_details.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/text_widget.dart';
 
 class OrderWidget extends StatefulWidget {
   const OrderWidget({Key? key}) : super(key: key);

@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 import '../../provider/viewed_prod_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/back_widget.dart';
-import '../../widgits/empty_screen.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/back_widget.dart';
+import '../../widgets/empty_screen.dart';
+import '../../widgets/text_widget.dart';
 
 class ViewedRecentlyScreen extends StatefulWidget {
   static const routeName = '/ViewedRecentlyScreen';

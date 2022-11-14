@@ -7,11 +7,11 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:grocery_commerce/screens/loading_manager.dart';
 import 'package:grocery_commerce/services/global_methods.dart';
 
-import '../../consts/contss.dart';
+import '../../consts/consts.dart';
 import '../../consts/firebase_consts.dart';
 import '../../services/utils.dart';
-import '../../widgits/auth_button.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/auth_button.dart';
+import '../../widgets/text_widget.dart';
 import '../btm_bar_screen.dart';
 import 'login.dart';
 

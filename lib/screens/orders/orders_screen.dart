@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../services/utils.dart';
-import '../../widgits/back_widget.dart';
-import '../../widgits/empty_screen.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/back_widget.dart';
+import '../../widgets/empty_screen.dart';
+import '../../widgets/text_widget.dart';
 import 'orders_widget.dart';
 
 class OrdersScreen extends StatefulWidget {

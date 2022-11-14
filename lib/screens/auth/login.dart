@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../consts/contss.dart';
+import '../../consts/consts.dart';
 import '../../consts/firebase_consts.dart';
 import '../../services/global_methods.dart';
-import '../../widgits/auth_button.dart';
-import '../../widgits/google_button.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/auth_button.dart';
+import '../../widgets/google_button.dart';
+import '../../widgets/text_widget.dart';
 import '../btm_bar_screen.dart';
 import '../loading_manager.dart';
 import 'forget_pass.dart';

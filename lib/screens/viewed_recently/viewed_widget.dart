@@ -12,7 +12,7 @@ import '../../provider/cart_provider.dart';
 import '../../provider/products_provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/text_widget.dart';
 
 class ViewedRecentlyWidget extends StatefulWidget {
   const ViewedRecentlyWidget({Key? key}) : super(key: key);

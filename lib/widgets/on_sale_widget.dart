@@ -2,7 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:grocery_commerce/widgits/text_widget.dart';
+import 'package:grocery_commerce/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/firebase_consts.dart';

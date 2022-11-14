@@ -1,11 +1,11 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
-import '../../consts/contss.dart';
+import '../../consts/consts.dart';
 import '../../services/utils.dart';
-import '../../widgits/auth_button.dart';
-import '../../widgits/back_widget.dart';
-import '../../widgits/text_widget.dart';
+import '../../widgets/auth_button.dart';
+import '../../widgets/back_widget.dart';
+import '../../widgets/text_widget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   static const routeName = '/ForgetPasswordScreen';

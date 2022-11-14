@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 
 import '../consts/firebase_consts.dart';
 import '../provider/dark_theme_provider.dart';
-import '../widgits/newListTile.dart';
-import '../widgits/text_widget.dart';
+import '../widgets/newListTile.dart';
+import '../widgets/text_widget.dart';
 import 'orders/orders_screen.dart';
 
 class UserScreen extends StatefulWidget {
